@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Episode, TvShow } from './pages';
 import * as serviceWorker from './serviceWorker';
+import './style.sass';
 
 const App = () => {
   return (
