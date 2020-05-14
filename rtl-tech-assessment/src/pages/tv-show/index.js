@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import './style.sass';
 
 const slugify = (string) => {
   const a = 'àáäâãåèéëêìíïîòóöôùúüûñçßÿœæŕśńṕẃǵǹḿǘẍźḧ·/_,:;';
@@ -27,15 +28,33 @@ export const TvShow = () => {
       .catch((error) => console.log(error));
   }, []);
 
-  // const { name, summary, image, _embedded } = show;
-
   return (
     <>
       {show && (
         <div>
-          <h1> {show.name}</h1>
-          <p>{show.summary.replace('<p>', '').replace('</p>', '')}</p>
-          <img src={show.image.original} alt={show.name} />
+          <div className="show-div">
+            <div className="left-div">
+              <section className="info-section">
+                <h1> {show.name}</h1>
+                <p>
+                  {show.summary
+                    .replace('<p>', '')
+                    .replace('</p>', '')
+                    .replace('<b>', '')
+                    .replace('</b>', '')}
+                </p>
+                <section className="separate-paragraphs">
+                  <p>Type: {show.type}</p>
+                  <p>Language: {show.language}</p>
+                  <p>Average Rating: {show.rating.average}</p>
+                </section>
+              </section>
+              <h2 id="episode-list">
+                <a href="#episode-list">Full list of episodes</a>
+              </h2>
+            </div>
+            <img className="show-image" src={show.image.original} alt={show.name} />
+          </div>
           <ul>
             {show._embedded.episodes.map((episode) => (
               <li key={episode.id}>
