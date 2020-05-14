@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './style.sass';
 
+// the slugify function is used to create slugs for episode page paths
 const slugify = (string) => {
   const a = 'àáäâãåèéëêìíïîòóöôùúüûñçßÿœæŕśńṕẃǵǹḿǘẍźḧ·/_,:;';
   const b = 'aaaaaaeeeeiiiioooouuuuncsyoarsnpwgnmuxzh------';
@@ -18,6 +19,8 @@ const slugify = (string) => {
     .replace(/-+$/, ''); // Trim — from end of text
 };
 
+// This function component displays information related to The Powerpuff Girls tv show on show page.
+// Data is fetched from the given REST api and in a useEffect hook
 export const TvShow = () => {
   const [show, setShow] = useState();
 
@@ -25,7 +28,7 @@ export const TvShow = () => {
     fetch(`http://api.tvmaze.com/shows/6771?embed=episodes`)
       .then((response) => response.json())
       .then((data) => setShow(data))
-      .catch((error) => console.log(error));
+      .catch((error) => console.error(error));
   }, []);
 
   return (
